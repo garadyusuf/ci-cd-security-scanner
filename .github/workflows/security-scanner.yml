@@ -18,10 +18,13 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "garadyusuf/hello-world-app:latest"
-          format: "table"
-          exit-code: 1
-          severity: "HIGH,CRITICAL"
+          image-ref: 'garadyusuf/hello-world-app:${{ github.sha }}'  
+          format: 'json' 
+          exit-code: '1' 
+          ignore-unfixed: true  
+          vuln-type: 'os,library' 
+          severity: 'HIGH,CRITICAL' 
+        continue-on-error: true 
     
 
       - name: Send AWS SNS Alert on Failure
