@@ -18,8 +18,10 @@ jobs:
       - name: Install Trivy
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-          export PATH=$PATH:$HOME/.local/bin
-          trivy --version      
+          echo "PATH=$HOME/bin:$PATH" >> $GITHUB_ENV
+          ls -lah $HOME/bin
+          trivy --version
+     
 
       - name: Scan Docker Image with Trivy
         run: |
